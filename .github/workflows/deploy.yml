@@ -22,7 +22,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           protocol: ftps
-          server-dir: /public_html/
+          server-dir: /home/hihvvage/public_html/
           exclude: |
             **/.git*
             **/.git*/**
@@ -30,3 +30,4 @@ jobs:
             **/.github/**
             **/README.md
             **/.gitignore
+            **/icons.zip

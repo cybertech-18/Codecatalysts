@@ -28,20 +28,21 @@ If you don't have FTP access:
 ```
 Name: FTP_HOST
 Value: ftp.codecatalysts.tech
-(or whatever your FTP host is)
 ```
 
 **Secret 2:**
 ```
 Name: FTP_USERNAME
-Value: your_cpanel_username
+Value: ayush@codecatalysts.tech
 ```
 
 **Secret 3:**
 ```
 Name: FTP_PASSWORD
-Value: your_cpanel_password
+Value: Anshi_0318
 ```
+
+**⚠️ IMPORTANT:** Type these EXACTLY as shown above (case-sensitive!)
 
 ### Step 3: Push the Workflow
 

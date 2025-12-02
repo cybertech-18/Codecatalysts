@@ -579,11 +579,146 @@ body::after {
     animation: fadeInLeft 0.8s ease 0.2s both;
 }
 
+/* About Intro Styling */
+.about-intro {
+    margin-bottom: 3rem;
+    animation: fadeInLeft 0.8s ease both;
+}
+
+.about-intro h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.lead-text {
+    font-size: 1.1rem !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    line-height: 1.8 !important;
+}
+
+/* Mission Box */
+.mission-box {
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    margin: 2.5rem 0;
+    animation: fadeInLeft 0.8s ease 0.1s both;
+    position: relative;
+    overflow: hidden;
+}
+
+.mission-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.03), transparent);
+    animation: shimmer 3s infinite;
+}
+
+.mission-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.mission-content h4 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+}
+
+.mission-content p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Journey Section */
+.journey-section {
+    margin: 3rem 0;
+    animation: fadeInLeft 0.8s ease 0.2s both;
+}
+
+.journey-title {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.journey-title i {
+    color: var(--primary-color);
+    animation: float 2s ease-in-out infinite;
+}
+
+.journey-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.journey-item {
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.journey-item:hover {
+    transform: translateY(-8px);
+    border-color: var(--secondary-color);
+    box-shadow: 0 15px 40px rgba(168, 85, 247, 0.3);
+    background: rgba(168, 85, 247, 0.05);
+}
+
+.journey-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    opacity: 0.3;
+}
+
+.journey-item h5 {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.journey-item p {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* About Values Grid */
 .about-values {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
-    margin: 2rem 0;
+    margin: 3rem 0;
     animation: fadeInLeft 0.8s ease 0.4s both;
 }
 
@@ -623,21 +758,87 @@ body::after {
     line-height: 1.5;
 }
 
+/* Tech Showcase */
+.tech-showcase {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 255, 0.15);
+    animation: fadeInLeft 0.8s ease 0.5s both;
+}
+
+.tech-title {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tech-title i {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tech-badge {
+    padding: 0.6rem 1.2rem;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 25px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.tech-badge:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
+}
+
+/* Stats Section */
 .stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
 }
 
 .stat-item {
     text-align: center;
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
     background: var(--card-bg);
     border-radius: 15px;
     border: 1px solid rgba(0, 245, 255, 0.2);
     transition: all 0.4s ease;
     animation: fadeInUp 0.8s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.stat-item:hover::before {
+    left: 100%;
 }
 
 .stat-item:hover {
@@ -645,6 +846,13 @@ body::after {
     border-color: var(--primary-color);
     box-shadow: 0 10px 40px rgba(0, 245, 255, 0.3);
     background: linear-gradient(135deg, rgba(0, 245, 255, 0.1) 0%, rgba(189, 0, 255, 0.1) 100%);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+    animation: float 3s ease-in-out infinite;
 }
 
 .stat-item h4 {
@@ -655,6 +863,12 @@ body::after {
     background-clip: text;
     margin-bottom: 0.5rem;
     animation: countUp 2s ease;
+}
+
+.stat-item p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
 }
 
 @keyframes countUp {
@@ -1664,7 +1878,40 @@ body::after {
     }
 
     .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .about-values {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .journey-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .mission-box {
+        flex-direction: column;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .mission-icon {
+        font-size: 2.5rem;
+    }
+
+    .tech-showcase {
+        padding: 1.5rem;
+    }
+
+    .tech-tags {
+        justify-content: center;
+    }
+
+    .about-intro h3 {
+        font-size: 1.5rem;
     }
 
     .services-grid,

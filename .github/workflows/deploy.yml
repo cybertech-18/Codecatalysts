@@ -26,6 +26,3 @@ jobs:
             **/node_modules/**
             **/.vscode/**
             **/.DS_Store
-            **/README.md
-            **/CONTACT_FORM_SETUP.md
-            **/DEPLOYMENT_GUIDE.md

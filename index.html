@@ -146,7 +146,7 @@
             </div>
             
             <div class="tech-showcase">
-                <div class="tech-tags">
+                <div class="tech-tags collapsed" id="techTags">
                     <img src="icons/React-Dark.svg" alt="React">
                     <img src="icons/TypeScript.svg" alt="TypeScript">
                     <img src="icons/NextJS-Dark.svg" alt="Next.js">
@@ -244,6 +244,10 @@
                     <img src="icons/DynamoDB-Dark.svg" alt="DynamoDB">
                     <img src="icons/Cassandra-Dark.svg" alt="Cassandra">
                 </div>
+                <button class="show-more-btn" id="showMoreBtn" onclick="toggleTechIcons()">
+                    <span class="btn-text">Show More</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
             </div>
         </div>
     </section>

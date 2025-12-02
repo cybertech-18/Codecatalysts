@@ -277,3 +277,26 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Toggle Tech Icons Show More/Less
+function toggleTechIcons() {
+    const techTags = document.getElementById('techTags');
+    const showMoreBtn = document.getElementById('showMoreBtn');
+    const btnText = showMoreBtn.querySelector('.btn-text');
+    
+    if (techTags.classList.contains('collapsed')) {
+        techTags.classList.remove('collapsed');
+        showMoreBtn.classList.add('expanded');
+        btnText.textContent = 'Show Less';
+    } else {
+        techTags.classList.add('collapsed');
+        showMoreBtn.classList.remove('expanded');
+        btnText.textContent = 'Show More';
+        
+        // Smooth scroll to tech section
+        const techShowcase = document.querySelector('.tech-showcase');
+        if (techShowcase) {
+            techShowcase.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+}

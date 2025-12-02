@@ -4,8 +4,8 @@ function createParticles() {
     particlesContainer.className = 'particles';
     document.body.appendChild(particlesContainer);
 
-    // Reduced to 30 particles for better performance
-    for (let i = 0; i < 30; i++) {
+    // Reduced to 15 particles for optimal performance
+    for (let i = 0; i < 15; i++) {
         const particle = document.createElement('div');
         particle.style.position = 'absolute';
         particle.style.width = Math.random() * 2 + 1 + 'px';
@@ -53,40 +53,53 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Active Navigation Link on Scroll
+// Active Navigation Link on Scroll - Throttled
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.nav-menu a');
 
+let scrollTimeout;
 window.addEventListener('scroll', () => {
-    let current = '';
+    if (scrollTimeout) return;
     
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
+    scrollTimeout = setTimeout(() => {
+        let current = '';
         
-        if (pageYOffset >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-});
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+        
+        scrollTimeout = null;
+    }, 100);
+}, { passive: true });
 
-// Navbar Scroll Effect
+// Navbar Scroll Effect - Combined with above throttled scroll
 const navbar = document.querySelector('.navbar');
 
+let navbarScrollTimeout;
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
+    if (navbarScrollTimeout) return;
+    
+    navbarScrollTimeout = setTimeout(() => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        navbarScrollTimeout = null;
+    }, 50);
+}, { passive: true });
 
 // Contact Form Handling
 const contactForm = document.getElementById('contactForm');
@@ -212,14 +225,25 @@ window.addEventListener('load', () => {
 });
 
 // ===== Optimized Parallax Scroll Effect =====
+let parallaxTicking = false;
 function parallaxEffect() {
     const scrolled = window.pageYOffset;
     const parallaxElements = document.querySelectorAll('.hero-content');
     
     parallaxElements.forEach(el => {
-        const speed = 0.3;
+        const speed = 0.2;
         el.style.transform = `translateY(${scrolled * speed}px)`;
     });
+    parallaxTicking = false;
+}
+
+if (window.innerWidth > 768) {
+    window.addEventListener('scroll', () => {
+        if (!parallaxTicking) {
+            requestAnimationFrame(parallaxEffect);
+            parallaxTicking = true;
+        }
+    }, { passive: true });
 }
 
 // ===== Interactive Button Ripple Effect =====

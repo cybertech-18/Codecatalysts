@@ -101,50 +101,45 @@ window.addEventListener('scroll', () => {
     }, 50);
 }, { passive: true });
 
-// Contact Form Handling
+// Contact Form Handling with Formspree
 const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
 
-contactForm.addEventListener('submit', (e) => {
+contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // Get form values
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
+    const formData = new FormData(contactForm);
+    const button = contactForm.querySelector('button[type="submit"]');
+    const buttonText = button.textContent;
     
-    // Here you would typically send this data to a server
-    // For now, we'll just show an alert
-    alert(`Thank you, ${name}! Your message has been received. We'll get back to you soon at ${email}.`);
+    // Show loading state
+    button.textContent = 'Sending...';
+    button.disabled = true;
+    formStatus.textContent = '';
     
-    // Reset form
-    contactForm.reset();
-    
-    // In a real application, you would use fetch or XMLHttpRequest to send data:
-    /*
-    fetch('your-server-endpoint.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            name: name,
-            email: email,
-            subject: subject,
-            message: message
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-        alert('Message sent successfully!');
-        contactForm.reset();
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-        alert('There was an error sending your message. Please try again.');
-    });
-    */
+    try {
+        const response = await fetch(contactForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            formStatus.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
+            formStatus.style.color = '#00ffff';
+            contactForm.reset();
+        } else {
+            throw new Error('Form submission failed');
+        }
+    } catch (error) {
+        formStatus.textContent = '✗ Oops! There was a problem. Please try again or email us directly.';
+        formStatus.style.color = '#ff6b6b';
+    } finally {
+        button.textContent = buttonText;
+        button.disabled = false;
+    }
 });
 
 // Scroll Reveal Animation with Optimized Performance

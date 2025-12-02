@@ -1,3 +1,28 @@
+// ===== Particle Background Effect =====
+function createParticles() {
+    const particlesContainer = document.createElement('div');
+    particlesContainer.className = 'particles';
+    document.body.appendChild(particlesContainer);
+
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = Math.random() * 3 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.background = `rgba(${Math.random() > 0.5 ? '0, 245, 255' : '189, 0, 255'}, 0.6)`;
+        particle.style.borderRadius = '50%';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animation = `float ${Math.random() * 10 + 5}s ease-in-out infinite`;
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particle.style.boxShadow = `0 0 ${Math.random() * 10 + 5}px rgba(0, 245, 255, 0.8)`;
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// Call particle creation on load
+createParticles();
+
 // Mobile Menu Toggle
 const mobileMenu = document.getElementById('mobile-menu');
 const navMenu = document.querySelector('.nav-menu');
@@ -106,7 +131,7 @@ contactForm.addEventListener('submit', (e) => {
     */
 });
 
-// Scroll Reveal Animation
+// Scroll Reveal Animation with Stagger Effect
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -116,7 +141,8 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.style.transform = 'translateY(0) scale(1)';
+            entry.target.classList.add('animated');
         }
     });
 }, observerOptions);
@@ -124,15 +150,27 @@ const observer = new IntersectionObserver((entries) => {
 // Observe all service cards, portfolio items, and other animated elements
 document.addEventListener('DOMContentLoaded', () => {
     const animatedElements = document.querySelectorAll(
-        '.service-card, .portfolio-item, .contact-item, .stat-item'
+        '.team-card, .project-card, .idea-card, .stat-item, .contact-item, .service-card'
     );
     
     animatedElements.forEach((el, index) => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = `all 0.6s ease ${index * 0.1}s`;
+        el.style.transform = 'translateY(50px) scale(0.95)';
+        el.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
         observer.observe(el);
     });
+
+    // Add floating animation to tech tags
+    const techTags = document.querySelectorAll('.tech-tag');
+    techTags.forEach((tag, index) => {
+        tag.style.animation = `float 3s ease-in-out ${index * 0.2}s infinite`;
+    });
+
+    // Add cursor trail effect
+    createCursorTrail();
+
+    // Parallax scroll effect
+    window.addEventListener('scroll', parallaxEffect);
 });
 
 // Loading Animation
@@ -168,3 +206,86 @@ window.addEventListener('load', () => {
         behavior: 'smooth'
     });
 });
+
+// ===== Cursor Trail Effect =====
+function createCursorTrail() {
+    let mouseX = 0, mouseY = 0;
+    let trailX = 0, trailY = 0;
+
+    const trail = document.createElement('div');
+    trail.style.position = 'fixed';
+    trail.style.width = '20px';
+    trail.style.height = '20px';
+    trail.style.borderRadius = '50%';
+    trail.style.border = '2px solid rgba(0, 245, 255, 0.5)';
+    trail.style.pointerEvents = 'none';
+    trail.style.zIndex = '9999';
+    trail.style.transition = 'all 0.1s ease';
+    trail.style.boxShadow = '0 0 20px rgba(0, 245, 255, 0.5)';
+    document.body.appendChild(trail);
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animateTrail() {
+        trailX += (mouseX - trailX) * 0.1;
+        trailY += (mouseY - trailY) * 0.1;
+        
+        trail.style.left = trailX - 10 + 'px';
+        trail.style.top = trailY - 10 + 'px';
+        
+        requestAnimationFrame(animateTrail);
+    }
+    
+    animateTrail();
+}
+
+// ===== Parallax Scroll Effect =====
+function parallaxEffect() {
+    const scrolled = window.pageYOffset;
+    const parallaxElements = document.querySelectorAll('.hero-content, .image-placeholder');
+    
+    parallaxElements.forEach(el => {
+        const speed = 0.5;
+        el.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+}
+
+// ===== Interactive Button Ripple Effect =====
+document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.animation = 'ripple 0.6s ease-out';
+        ripple.style.pointerEvents = 'none';
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+    });
+});
+
+// Add ripple animation CSS
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);

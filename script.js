@@ -1,27 +1,30 @@
-// ===== Particle Background Effect =====
+// ===== Optimized Particle Background Effect =====
 function createParticles() {
     const particlesContainer = document.createElement('div');
     particlesContainer.className = 'particles';
     document.body.appendChild(particlesContainer);
 
-    for (let i = 0; i < 50; i++) {
+    // Reduced to 30 particles for better performance
+    for (let i = 0; i < 30; i++) {
         const particle = document.createElement('div');
         particle.style.position = 'absolute';
-        particle.style.width = Math.random() * 3 + 'px';
+        particle.style.width = Math.random() * 2 + 1 + 'px';
         particle.style.height = particle.style.width;
-        particle.style.background = `rgba(${Math.random() > 0.5 ? '0, 245, 255' : '189, 0, 255'}, 0.6)`;
+        particle.style.background = `rgba(${Math.random() > 0.5 ? '0, 255, 255' : '168, 85, 247'}, 0.5)`;
         particle.style.borderRadius = '50%';
         particle.style.left = Math.random() * 100 + '%';
         particle.style.top = Math.random() * 100 + '%';
-        particle.style.animation = `float ${Math.random() * 10 + 5}s ease-in-out infinite`;
-        particle.style.animationDelay = Math.random() * 5 + 's';
-        particle.style.boxShadow = `0 0 ${Math.random() * 10 + 5}px rgba(0, 245, 255, 0.8)`;
+        particle.style.animation = `float ${Math.random() * 8 + 4}s ease-in-out infinite`;
+        particle.style.animationDelay = Math.random() * 3 + 's';
+        particle.style.boxShadow = `0 0 10px rgba(0, 255, 255, 0.6)`;
         particlesContainer.appendChild(particle);
     }
 }
 
 // Call particle creation on load
-createParticles();
+if (window.innerWidth > 768) {
+    createParticles();
+}
 
 // Mobile Menu Toggle
 const mobileMenu = document.getElementById('mobile-menu');
@@ -131,10 +134,10 @@ contactForm.addEventListener('submit', (e) => {
     */
 });
 
-// Scroll Reveal Animation with Stagger Effect
+// Scroll Reveal Animation with Optimized Performance
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -143,34 +146,35 @@ const observer = new IntersectionObserver((entries) => {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0) scale(1)';
             entry.target.classList.add('animated');
+            observer.unobserve(entry.target); // Stop observing after animation
         }
     });
 }, observerOptions);
 
-// Observe all service cards, portfolio items, and other animated elements
+// Observe all animated elements
 document.addEventListener('DOMContentLoaded', () => {
     const animatedElements = document.querySelectorAll(
-        '.team-card, .project-card, .idea-card, .stat-item, .contact-item, .service-card'
+        '.team-card, .project-card, .idea-card, .stat-item, .contact-item'
     );
     
     animatedElements.forEach((el, index) => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(50px) scale(0.95)';
-        el.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+        el.style.transform = 'translateY(40px) scale(0.96)';
+        el.style.transition = `all 0.7s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.08}s`;
         observer.observe(el);
     });
 
-    // Add floating animation to tech tags
-    const techTags = document.querySelectorAll('.tech-tag');
-    techTags.forEach((tag, index) => {
-        tag.style.animation = `float 3s ease-in-out ${index * 0.2}s infinite`;
+    // Optimized parallax with throttle
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                parallaxEffect();
+                ticking = false;
+            });
+            ticking = true;
+        }
     });
-
-    // Add cursor trail effect
-    createCursorTrail();
-
-    // Parallax scroll effect
-    window.addEventListener('scroll', parallaxEffect);
 });
 
 // Loading Animation
@@ -207,48 +211,13 @@ window.addEventListener('load', () => {
     });
 });
 
-// ===== Cursor Trail Effect =====
-function createCursorTrail() {
-    let mouseX = 0, mouseY = 0;
-    let trailX = 0, trailY = 0;
-
-    const trail = document.createElement('div');
-    trail.style.position = 'fixed';
-    trail.style.width = '20px';
-    trail.style.height = '20px';
-    trail.style.borderRadius = '50%';
-    trail.style.border = '2px solid rgba(0, 245, 255, 0.5)';
-    trail.style.pointerEvents = 'none';
-    trail.style.zIndex = '9999';
-    trail.style.transition = 'all 0.1s ease';
-    trail.style.boxShadow = '0 0 20px rgba(0, 245, 255, 0.5)';
-    document.body.appendChild(trail);
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    function animateTrail() {
-        trailX += (mouseX - trailX) * 0.1;
-        trailY += (mouseY - trailY) * 0.1;
-        
-        trail.style.left = trailX - 10 + 'px';
-        trail.style.top = trailY - 10 + 'px';
-        
-        requestAnimationFrame(animateTrail);
-    }
-    
-    animateTrail();
-}
-
-// ===== Parallax Scroll Effect =====
+// ===== Optimized Parallax Scroll Effect =====
 function parallaxEffect() {
     const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('.hero-content, .image-placeholder');
+    const parallaxElements = document.querySelectorAll('.hero-content');
     
     parallaxElements.forEach(el => {
-        const speed = 0.5;
+        const speed = 0.3;
         el.style.transform = `translateY(${scrolled * speed}px)`;
     });
 }

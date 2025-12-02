@@ -579,6 +579,50 @@ body::after {
     animation: fadeInLeft 0.8s ease 0.2s both;
 }
 
+.about-values {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+    animation: fadeInLeft 0.8s ease 0.4s both;
+}
+
+.value-item {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background: rgba(0, 255, 255, 0.03);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.value-item:hover {
+    background: rgba(0, 255, 255, 0.08);
+    border-color: rgba(0, 255, 255, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.15);
+}
+
+.value-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.value-item h4 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.value-item p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
